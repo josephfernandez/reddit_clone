@@ -1,3 +1,10 @@
+var mongoose = require('mongoose');
+var passport = require('passport');
+require('./models/Posts');
+require('./models/Comments');
+require('./models/Users');
+require('./config/passport');
+mongoose.connect('mongodb://localhost/news',{useUnifiedTopology: true, useNewUrlParser: true });
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -18,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
