@@ -79,8 +79,18 @@ function($stateProvider, $urlRouterProvider) {
       headers: {Authorization: 'Bearer '+auth.getToken()}
     }).success(function(data){
       post.upvotes += 1;
+      post.votes = data.votes
     });
   };
+
+  o.downvote = function(post) {
+  return $http.put('/posts/' + post._id + '/downvote', null, {
+    headers: {Authorization: 'Bearer ' +auth.getToken()}
+  }).success(function(data){
+    post.upvotes -= 1;
+    post.votes = data.votes;
+  });
+};
 
   o.addComment = function(id, comment) {
     return $http.post('/posts/' + id + '/comments', comment, {
@@ -93,8 +103,18 @@ function($stateProvider, $urlRouterProvider) {
       headers: {Authorization: 'Bearer '+ auth.getToken()}
     }).success(function(data){
       comment.upvotes += 1;
+      comment.votes = data.votes;
     });
   };
+
+  o.downvoteComment = function(post, comment) {
+    return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/downvote', null, {
+      headers: {Authorization: 'Bearer ' + auth.getToken()}
+    }).success(function(data){
+      comment.upvotes -= 1;
+      comment.votes = data.votes;
+    })
+  }
 
   return o;
 }])
@@ -109,7 +129,7 @@ function($stateProvider, $urlRouterProvider) {
     isLoggedIn: function(){
       var token = auth.getToken();
 
-      i f(token){
+      if(token){
         var payload = JSON.parse($window.atob(token.split('.')[1]));
 
         return payload.exp > Date.now() / 1000;
@@ -147,11 +167,9 @@ function($stateProvider, $urlRouterProvider) {
 'posts',
 'auth',
 function($scope, posts, auth){
-  $scope.test = 'Hello world!';
-
+  $scope.currentUser = auth.currentUser;
   $scope.posts = posts.posts;
   $scope.isLoggedIn = auth.isLoggedIn;
-
   $scope.addPost = function(){
     if($scope.title === '') { return; }
     posts.create({
@@ -166,13 +184,18 @@ function($scope, posts, auth){
     posts.upvote(post);
   };
 
+  $scope.decrementUpvotes = function(post) {
+    posts.downvote(post);
+  };
 }])
+
 .controller('PostsCtrl', [
 '$scope',
 'posts',
 'post',
 'auth',
 function($scope, posts, post, auth){
+  $scope.currentUser = auth.currentUser;
   $scope.post = post;
   $scope.isLoggedIn = auth.isLoggedIn;
 
@@ -190,16 +213,22 @@ function($scope, posts, post, auth){
   $scope.incrementUpvotes = function(comment){
     posts.upvoteComment(post, comment);
   };
+  $scope.decrementUpvotes = function(comment) {
+    posts.downvoteComment(post, comment);
+  };
 
 }])
 .controller('AuthCtrl', [
 '$scope',
 '$state',
+'posts',
 'auth',
-function($scope, $state, auth){
+function($scope, $state, posts, auth){
   $scope.user = {};
+  var posts = posts.getAll();
 
   $scope.register = function(){
+
     auth.register($scope.user).error(function(error){
       $scope.error = error;
     }).then(function(){

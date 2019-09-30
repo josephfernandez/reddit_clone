@@ -31,7 +31,8 @@
       <h1>Flapper News</h1>
     </div>
     <div ng-repeat="post in posts | orderBy: '-upvotes'">
-      <button class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">upvote</button>
+      <button ng-hide="post.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">Upvote</button>
+      <button ng-hide="post.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(post)">Downvote</button>
       upvotes: {{post.upvotes}}
       <span style="font-size:20px; margin-left:10px;">
         <span ng-show="post.author">posted by <a>{{post.author}}</a> |
@@ -45,7 +46,7 @@
 
       </span>
       <span>
-        <a href="#/posts/{{post._id}}">Comments</a>
+        <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
       </span>
     </div>
 
@@ -76,8 +77,8 @@
     </div>
 
     <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-      <button class="glyphicon glyphicon-thumbs-up"
-      ng-click="incrementUpvotes(comment)"></button>
+      <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">Upvote</button>
+      <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">Downvote</button>
       {{comment.upvotes}} - by {{comment.author}}
       <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}

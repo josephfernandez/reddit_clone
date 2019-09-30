@@ -27,7 +27,6 @@ router.get('/posts', function(req, res, next) {
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
   post.author = req.payload.username;
-
   post.save(function(err, post){
     if(err){ return next(err); }
 
@@ -73,10 +72,28 @@ router.get('/posts/:post', function(req, res, next) {
 
 // upvote a post
 router.put('/posts/:post/upvote', auth, function(req, res, next) {
+  req.post.votes.push(req.payload.username);
   req.post.upvote(function(err, post){
     if (err) { return next(err); }
 
-    res.json(post);
+    req.post.save(function(err, post){
+      if(err){ return next(err); }
+      res.json(post);
+    });
+  });
+});
+
+//downvote a post
+router.put('/posts/:post/downvote', auth, function(req,res,next) {
+  req.post.votes.push(req.payload.username);
+  req.post.downvote(function(err,post){
+    if(err) {return next(err);}
+
+    req.post.save(function(err, post){
+      if(err){ return next(err); }
+
+      res.json(post);
+    });
   });
 });
 
@@ -84,7 +101,7 @@ router.put('/posts/:post/upvote', auth, function(req, res, next) {
 // create a new comment
 router.post('/posts/:post/comments', auth, function(req, res, next) {
   var comment = new Comment(req.body);
-  comment.post = req.post;
+  comment.post = req.post._id;
   comment.author = req.payload.username;
 
   comment.save(function(err, comment){
@@ -102,7 +119,18 @@ router.post('/posts/:post/comments', auth, function(req, res, next) {
 
 // upvote a comment
 router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, next) {
+  req.comment.votes.push(req.payload.username);
   req.comment.upvote(function(err, comment){
+    if (err) { return next(err); }
+
+    res.json(comment);
+  });
+});
+
+// downvote a comment
+router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, next) {
+  req.comment.votes.push(req.payload.username);
+  req.comment.downvote(function(err, comment){
     if (err) { return next(err); }
 
     res.json(comment);
@@ -134,9 +162,7 @@ router.post('/register', function(req, res, next){
   var user = new User();
 
   user.username = req.body.username;
-
   user.setPassword(req.body.password)
-
   user.save(function (err){
     if(err){ return next(err); }
 

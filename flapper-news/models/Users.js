@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
   hash: String,
   salt: String
 });
+
 UserSchema.methods.generateJWT = function() {
   var today = new Date();
   var exp = new Date(today);
@@ -19,6 +20,7 @@ UserSchema.methods.generateJWT = function() {
   }, 'SECRET');
 };
 UserSchema.methods.setPassword = function(password) {
+  console.log('beginning of setPassword');
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password,this.salt,1000,64,'sha512').toString('hex');
   // this.hash = 1;
