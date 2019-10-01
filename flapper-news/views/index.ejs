@@ -1,40 +1,213 @@
+
 <html>
 <head>
-  <title>My Angular App!</title>
+
+  <title>Reddit Clone</title>
+  <link rel="icon" href="images/redditlogo.png">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
-  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script> -->
-
   <script src="/javascripts/angularApp.js"></script>
-  <style> .glyphicon-thumbs-up {cursor:pointer} </style>
+
+  <style>
+    .glyphicon-thumbs-up {cursor:pointer}
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code, del, dfn, em, img, input, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+    }
+
+    .search input{
+      text-indent: 32px;
+    }
+
+    /* .fg--search i {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      /* padding: 18px 20px; */
+      z-index: 2;
+    } */
+
+    div {
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    #form-input {
+      background-color:#f3f3f3;
+    }
+    #form-input:hover {
+      border-color: #0079D3;
+      background-color: white;
+    }
+    #form-input:focus {
+      box-shadow: 0 0 0;
+    }
+    .post {
+      background-color: #FFFFFF;
+      padding-left: 40px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid black;
+      cursor: pointer;
+      transition: color .5s,fill .5s,box-shadow .5s;
+      overflow: hidden;
+      background-color: rgba(255,255,255,0.8);
+      display: block;
+      font-size: 100%;
+    }
+    /* .post-lefthand-column {
+      align-items: center;
+      /* height: 100%; */
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      left: 0;
+      padding: 8px 4px 8px 0;
+      background-color: gray;
+      /* position: absolute; */
+      top: 0;
+      /* background-color: #DAE0E6; */
+    }
+    .post-lefthand-column-voting {
+      align-items: center;
+      display: flex;
+      fill: inherit;
+      flex-direction: column;
+    } */
+    /* html, body {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: 100%;
+      max-width: 100%;
+    } */
+    .navbar {
+      /* overflow: hidden; */
+      position: fixed;
+      top: 0;
+      width: 100%;
+      border-bottom: 1px solid #ededed;
+    }
+    .navbar-nav {
+      flex-direction: row;
+    }
+    .row {
+      overflow-x:auto;
+      top:30px;
+      left:0;right:0;
+      bottom:0;
+      position:absolute;
+      padding: 16px;
+      margin-top: 27px;
+      background-color: #DAE0E6;
+    }
+  a {
+    text-decoration: none !important;
+  }
+  .login-button {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 24px;
+    text-transform: uppercase;
+    padding: 3px 16px;
+    border-color: blue;
+    margin-left: 4px;
+    display: block;
+  }
+  .register-button {
+    border: 1px solid transparent;
+    background-color: #0079D3;
+    color: white;
+    fill: white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 24px;
+    text-transform: uppercase;
+    padding: 3px 16px;
+    border-color: blue;
+    margin-left: 4px;
+    display: block;
+  }
+  .register-button:hover {
+    filter: brightness(120%);
+    color: white;
+  }
+  </style>
 </head>
 <body ng-app="flapperNews">
-  <body ng-app="flapperNews">
-  <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
-    <ul class="nav navbar-nav">
-      <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
-      <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
-      <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
-      <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
-    </ul>
-  </nav>
-  <!-- <body> -->
+  <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-white">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img src="images/redditlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          Reddit Clone</a>
+      </div>
+      <!-- <label class="form-image" for="search-bar">
+        <svg class="form-image-svg" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+          <path d="images/uparrow.png"></path>
+      </label> -->
+      <div class="search fg--search">
+      <form class="form-inline my-2 my-lg-0">
+        <i class="fa fa-search"></i>
+        <input class="form-control mr-sm-2" id="form-input" type="search" placeholder="Search Reddit Clone.." aria-label="Search">
+      </form>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="login-button" href="#/login">login</a></li>
+        <li><a class="register-button" href="#/register">register</a></li>
+      </ul>
+  </div>
+</nav>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+      <span class="glyphicon glyphicon-search">dfadsfasf</span>
       <ui-view></ui-view>
     </div>
   </div>
 
   <script type="text/ng-template" id="/home.html">
-    <div class="page-header">
-      <h1>Flapper News</h1>
-    </div>
-    <div ng-repeat="post in posts | orderBy: '-upvotes'">
-      <button ng-hide="post.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">Upvote</button>
-      <button ng-hide="post.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(post)">Downvote</button>
-      upvotes: {{post.upvotes}}
-      <span style="font-size:20px; margin-left:10px;">
+    <div class="post" ng-repeat="post in posts | orderBy: '-upvotes'">
+      <div class="post-lefthand-column" style="width:40px; border-left: 4px solid transparent;">
+        <div class="post-lefthand-column-voting">
+          <!-- <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
+          <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
+          <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/> -->
+        </div>
+        <div class="post-righthand-content" style="background:#ffffff; padding-top: 8px; position: relative;" data-click-id="background">
+          <article></article>
+          <div class="post-righthand-content-lower" style="align-items: center; display: flex; flex-direction: row; margin-right: 10px;">
+            <div class="post-righthand-content-lower-content" style="font-size:12px; font-weight:700; line-height:16px; align-items: center;
+            display: flex; flex-direction: row; height: 32px; padding: 0 8px 0 4px; flex-grow: 1;">
+            <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}" style="margin-right:4px; min-width: 25px; white-space: nowrap; word-break:normal; border-radius: 2px;">
+              <span class="post-righthand-content-lower-content-commentslink-numOfComents" style="display: inline-block;
+              line-height: 1; text-transform: capitalize; vertical-align: middle; word-break: normal; white-space: nowrap;">{{post.comments.length}} comments</span>
+          </div>
+        </div>
+      </div>
+      <!-- <span style="font-size:20px; margin-left:10px;">
         <span ng-show="post.author">posted by <a>{{post.author}}</a> |
         </span>
         <a ng-show="post.link" href="{{post.link}}">
@@ -43,14 +216,13 @@
         <span ng-hide="post.link">
           {{post.title}}
         </span>
-
-      </span>
-      <span>
+      </span> -->
+      <!-- <span>
         <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
-      </span>
+      </span> -->
     </div>
 
-    <form ng-submit="addPost()" style="margin-top:30px;">
+    <!-- <form ng-submit="addPost()" style="margin-top:30px;">
       <h3>Add a new post</h3>
 
       <div class="form-group">
@@ -60,7 +232,7 @@
         <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
       </div>
       <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+    </form> -->
 
   </script>
 
@@ -77,9 +249,12 @@
     </div>
 
     <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-      <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">Upvote</button>
-      <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">Downvote</button>
-      {{comment.upvotes}} - by {{comment.author}}
+      <!-- <button img="public/images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">Upvote</button> -->
+      <input type="image" src="images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="incrementUpvotes(comment)"/>
+      <div>{{comment.upvotes}}</div>
+      <input type="image" src="images/downarrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="decrementUpvotes(comment)"/>
+      <!-- <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">Downvote</button> -->
+      by {{comment.author}}
       <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
       </span>
