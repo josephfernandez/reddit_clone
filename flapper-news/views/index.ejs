@@ -21,7 +21,9 @@
     }
 
     .search input{
-      text-indent: 20px;
+      /* padding-left: 0; */
+      text-indent: 5px;
+      background-color: #f3f3f3;
     }
 
     div {
@@ -32,8 +34,24 @@
       text-decoration: none;
       color: inherit;
     }
+
+    .navbar>.container-fluid  {
+      flex-wrap: nowrap;
+    }
+    .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    margin-right:0;
+    vertical-align: middle;
+}
+
+    .form-inline {
+      flex-flow: row nowrap;
+    }
     #form-input {
       background-color:#f3f3f3;
+      border: 1px solid transparent;
+      padding-right:0;
     }
     #form-input:hover {
       border-color: #0079D3;
@@ -60,14 +78,14 @@
     /* .post-lefthand-column {
       align-items: center;
       /* height: 100%; */
-      box-sizing: border-box;
+      /* box-sizing: border-box;
       display: flex;
       flex-direction: column;
       left: 0;
       padding: 8px 4px 8px 0;
       background-color: gray;
       /* position: absolute; */
-      top: 0;
+      /* top: 0; *//*/
       /* background-color: #DAE0E6; */
     }
     .post-lefthand-column-voting {
@@ -147,9 +165,9 @@
   </style>
 </head>
 <body ng-app="flapperNews">
-  <nav class="navbar navbar-expand-lg navbar-static-top navbar-light bg-white">
-    <div class="container-fluid">
-      <div class="navbar-header">
+  <nav class="navbar navbar-static-top navbar-light bg-white" style="padding-left:0; padding-right:0;">
+    <div class="container-fluid" style="padding-left:0; padding-right:0;">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 navbar-header pull-left">
         <a class="navbar-brand" href="#">
           <img src="images/redditlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
           Reddit Clone</a>
@@ -158,16 +176,31 @@
         <svg class="form-image-svg" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
           <path d="images/uparrow.png"></path>
       </label> -->
-      <div class="search fg--search">
-      <form class="form-inline my-2 my-lg-0">
-        <i class="fa fa-search"></i>
-        <input class="form-control mr-sm-2" id="form-input" type="search" placeholder="Search Reddit Clone.." aria-label="Search">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7 search fg--search" id="form-input">
+      <form class="form-inline">
+        <span class="fa fa-search" style="padding-left:5px;"></span>
+        <input class="form-control pr-xl-0 pr-lg-0 pr-md-0 pr-sm-0" type="search" placeholder="Search Reddit Clone.." aria-label="Search" style="border:none;">
       </form>
-    </div>
-      <ul class="nav navbar-nav navbar-right">
+  </div>
+    <!-- <div class="col-lg-4"> -->
+    <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block">
+      <ul class="nav navbar-nav navbar-right pull-right">
         <li><a class="login-button" href="#/login">login</a></li>
         <li><a class="register-button" href="#/register">register</a></li>
       </ul>
+    </div>
+    <div class="col-sm-1 d-none d-sm-block d-md-none">
+      <!-- <ul class="nav navbar-nav navbar-right pull-right">
+        <li><a class="login-button" href="#/login">login</a></li>
+        <li><a class="register-button" href="#/register">register</a></li>
+      </ul> -->
+    </div>
+    <div class="col-xs-1 d-none d-sm-block d-sm-none">
+      <!-- <ul class="nav navbar-nav navbar-right pull-right">
+        <li><a class="login-button" href="#/login">login</a></li>
+        <li><a class="register-button" href="#/register">register</a></li>
+      </ul> -->
+    </div>
   </div>
 </nav>
   <div class="row">
