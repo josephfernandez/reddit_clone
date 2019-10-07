@@ -225,6 +225,7 @@ function($scope, posts, post, auth){
 'auth',
 function($scope, $state, posts, auth){
   $scope.user = {};
+  console.log('hello');
   var posts = posts.getAll();
 
   $scope.register = function(){
@@ -252,3 +253,29 @@ function($scope, auth){
   $scope.currentUser = auth.currentUser;
   $scope.logOut = auth.logOut;
 }]);
+
+$(document).ready(function() {
+  $(document).on("mouseleave","#form-input-field",function() {
+    if($(this).not(':focus')) {
+      $(this).css('background-color','#f3f3f3');
+      $(this).parent('form').parent('div').css('background-color','f3f3f3');
+      $(this).parent('form').parent('div').css('border','1px solid transparent');
+    }
+    if($(this).is(':focus')){
+      $(this).css('background-color','white');
+      $(this).parent('form').parent('div').css('background-color','white');
+      $(this).parent('form').parent('div').css('border','1px solid #0079D3');
+    }
+  });
+
+  $(document).on("focusout","#form-input-field",function() {
+    $(this).css('background-color','#f3f3f3');
+    $(this).parent('form').parent('div').css('background-color','f3f3f3');
+    $(this).parent('form').parent('div').css('border','1px solid transparent');
+  });
+  $(document).on("mouseenter","#form-input-field",function(){
+    $(this).css('background-color','white');
+    $(this).parent('form').parent('div').css('background-color','white');
+    $(this).parent('form').parent('div').css('border','1px solid #0079D3');
+  });
+});

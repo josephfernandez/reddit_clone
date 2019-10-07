@@ -1,298 +1,170 @@
 
 <html>
 <head>
-
   <title>Reddit Clone</title>
   <link rel="icon" href="images/redditlogo.png">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="stylesheets/style.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
   <script src="/javascripts/angularApp.js"></script>
-
-  <style>
-    .glyphicon-thumbs-up {cursor:pointer}
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code, del, dfn, em, img, input, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-    }
-
-    .search input{
-      /* padding-left: 0; */
-      text-indent: 5px;
-      background-color: #f3f3f3;
-    }
-
-    div {
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .navbar>.container-fluid  {
-      flex-wrap: nowrap;
-    }
-    .form-inline .form-control {
-    display: inline-block;
-    width: 100%;
-    margin-right:0;
-    vertical-align: middle;
-}
-
-    .form-inline {
-      flex-flow: row nowrap;
-    }
-    #form-input {
-      background-color:#f3f3f3;
-      border: 1px solid transparent;
-      padding-right:0;
-    }
-    #form-input:hover {
-      border-color: #0079D3;
-      background-color: white;
-    }
-    #form-input:focus {
-      border-color: #0079D3;
-      background-color: white;
-      box-shadow: 0 0 0;
-    }
-    .post {
-      background-color: #FFFFFF;
-      padding-left: 40px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      border: 1px solid black;
-      cursor: pointer;
-      transition: color .5s,fill .5s,box-shadow .5s;
-      overflow: hidden;
-      background-color: rgba(255,255,255,0.8);
-      display: block;
-      font-size: 100%;
-    }
-    /* .post-lefthand-column {
-      align-items: center;
-      /* height: 100%; */
-      /* box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      left: 0;
-      padding: 8px 4px 8px 0;
-      background-color: gray;
-      /* position: absolute; */
-      /* top: 0; *//*/
-      /* background-color: #DAE0E6; */
-    }
-    .post-lefthand-column-voting {
-      align-items: center;
-      display: flex;
-      fill: inherit;
-      flex-direction: column;
-    } */
-    /* html, body {
-      overflow-x: hidden;
-      overflow-y: scroll;
-      height: 100%;
-      max-width: 100%;
-    } */
-    .navbar {
-      /* overflow: hidden; */
-      position: fixed;
-      top: 0;
-      width: 100%;
-      border-bottom: 1px solid #ededed;
-    }
-    .navbar-nav {
-      flex-direction: row;
-    }
-    .row {
-      overflow-x:auto;
-      top:30px;
-      left:0;right:0;
-      bottom:0;
-      position:absolute;
-      padding: 16px;
-      margin-top: 27px;
-      background-color: #DAE0E6;
-    }
-  a {
-    text-decoration: none !important;
-  }
-  .login-button {
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    border-color: blue;
-    margin-left: 4px;
-    display: block;
-  }
-  .register-button {
-    border: 1px solid transparent;
-    background-color: #0079D3;
-    color: white;
-    fill: white;
-    border-radius: 4px;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    border-color: blue;
-    margin-left: 4px;
-    display: block;
-  }
-  .register-button:hover {
-    filter: brightness(120%);
-    color: white;
-  }
-  </style>
 </head>
 <body ng-app="flapperNews">
-  <nav class="navbar navbar-static-top navbar-light bg-white" style="padding-left:0; padding-right:0;">
-    <div class="container-fluid" style="padding-left:0; padding-right:0;">
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 navbar-header pull-left">
-        <a class="navbar-brand" href="#">
-          <img src="images/redditlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-          Reddit Clone</a>
-      </div>
-      <!-- <label class="form-image" for="search-bar">
-        <svg class="form-image-svg" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+  <div class="row">
+    <nav class="navbar navbar-fixed-top navbar-light bg-white" ng-controller="NavCtrl">
+      <div class="container-fluid">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 navbar-header pull-left">
+          <a class="navbar-brand" href="#">
+            <img src="images/redditlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Reddit Clone</a>
+          </div>
+          <!-- <label class="form-image" for="search-bar">
+          <svg class="form-image-svg" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
           <path d="images/uparrow.png"></path>
-      </label> -->
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7 search fg--search" id="form-input">
-      <form class="form-inline">
-        <span class="fa fa-search" style="padding-left:5px;"></span>
-        <input class="form-control pr-xl-0 pr-lg-0 pr-md-0 pr-sm-0" type="search" placeholder="Search Reddit Clone.." aria-label="Search" style="border:none;">
-      </form>
-  </div>
-    <!-- <div class="col-lg-4"> -->
-    <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block">
-      <ul class="nav navbar-nav navbar-right pull-right">
-        <li><a class="login-button" href="#/login">login</a></li>
-        <li><a class="register-button" href="#/register">register</a></li>
+        </label> -->
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7 search fg--search" id="form-input">
+          <form class="form-inline">
+            <span class="fa fa-search" id="search-icon"></span>
+            <input class="form-control pr-xl-0 pr-lg-0 pr-md-0 pr-sm-0" type="search" placeholder="Search Reddit Clone.." aria-label="Search" id="form-input-field">
+          </form>
+        </div>
+        <!-- <div class="col-lg-4"> -->
+
+        <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block" id="button-div">
+          <ul class="nav navbar-nav navbar-right pull-right">
+            <!-- <li><div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div></li> -->
+      <li ng-hide="!isLoggedIn()"><a class="login-button" href="#/login">login</a></li>
+      <li ng-hide="!isLoggedIn()"><a class="register-button" href="#/register">register</a></li>
+      <li ng-hide="!isLoggedIn()">
+        <div class="dropdown" id="dropdown-div">
+          <button class="btn btn-secondary btn-sm dropdown-toggle shadow-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i></button>
+            <div id="dropdownMenu" class="dropdown-menu dropdown-menu-right float-right" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
     <div class="col-sm-1 d-none d-sm-block d-md-none">
       <!-- <ul class="nav navbar-nav navbar-right pull-right">
-        <li><a class="login-button" href="#/login">login</a></li>
-        <li><a class="register-button" href="#/register">register</a></li>
-      </ul> -->
-    </div>
-    <div class="col-xs-1 d-none d-sm-block d-sm-none">
-      <!-- <ul class="nav navbar-nav navbar-right pull-right">
-        <li><a class="login-button" href="#/login">login</a></li>
-        <li><a class="register-button" href="#/register">register</a></li>
-      </ul> -->
-    </div>
+      <li><a class="login-button" href="#/login">login</a></li>
+      <li><a class="register-button" href="#/register">register</a></li>
+    </ul> -->
   </div>
+  <div class="col-xs-1 d-none d-sm-block d-sm-none">
+    <!-- <ul class="nav navbar-nav navbar-right pull-right">
+    <li><a class="login-button" href="#/login">login</a></li>
+    <li><a class="register-button" href="#/register">register</a></li>
+  </ul> -->
+</div>
+</div>
 </nav>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <span class="glyphicon glyphicon-search">dfadsfasf</span>
+</div>
+<div class="row" id="background">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center">
       <ui-view></ui-view>
     </div>
   </div>
+</div>
 
-  <script type="text/ng-template" id="/home.html">
-    <div class="post" ng-repeat="post in posts | orderBy: '-upvotes'">
-      <div class="post-lefthand-column" style="width:40px; border-left: 4px solid transparent;">
-        <div class="post-lefthand-column-voting">
-          <!-- <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
-          <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
-          <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/> -->
-        </div>
-        <div class="post-righthand-content" style="background:#ffffff; padding-top: 8px; position: relative;" data-click-id="background">
-          <article></article>
-          <div class="post-righthand-content-lower" style="align-items: center; display: flex; flex-direction: row; margin-right: 10px;">
-            <div class="post-righthand-content-lower-content" style="font-size:12px; font-weight:700; line-height:16px; align-items: center;
-            display: flex; flex-direction: row; height: 32px; padding: 0 8px 0 4px; flex-grow: 1;">
-            <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}" style="margin-right:4px; min-width: 25px; white-space: nowrap; word-break:normal; border-radius: 2px;">
-              <span class="post-righthand-content-lower-content-commentslink-numOfComents" style="display: inline-block;
-              line-height: 1; text-transform: capitalize; vertical-align: middle; word-break: normal; white-space: nowrap;">{{post.comments.length}} comments</span>
+<script type="text/ng-template" id="/home.html">
+
+  <form ng-submit="addPost()" id="addPostForm">
+    <h3>Add a new post</h3>
+
+    <div class="form-group">
+      <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    </div>
+    <div class="form-group">
+      <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+  <br><br>
+  <div class="post" ng-repeat="post in posts | orderBy: '-upvotes'">
+    <div class="post-lefthand-column">
+      <div class="post-lefthand-column-voting">
+        <!-- <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
+        <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
+        <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/> -->
+      </div>
+      <div class="post-righthand-content" data-click-id="background">
+        <article></article>
+        <div class="post-righthand-content-lower">
+          <div class="post-righthand-content-lower-content">
+          <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}">
+            <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p><h1>{{post.title}}</h1></p> <p>{{post.comments.length}} comments</p></span>
           </div>
         </div>
       </div>
       <!-- <span style="font-size:20px; margin-left:10px;">
-        <span ng-show="post.author">posted by <a>{{post.author}}</a> |
-        </span>
-        <a ng-show="post.link" href="{{post.link}}">
-          {{post.title}}
-        </a>
-        <span ng-hide="post.link">
-          {{post.title}}
-        </span>
-      </span> -->
-      <!-- <span>
-        <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
-      </span> -->
-    </div>
+      <span ng-show="post.author">posted by <a>{{post.author}}</a> |
+    </span>
+    <a ng-show="post.link" href="{{post.link}}">
+    {{post.title}}
+  </a>
+  <span ng-hide="post.link">
+  {{post.title}}
+</span>
+</span> -->
+<!-- <span>
+<a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
+</span> -->
+</div>
 
-    <!-- <form ng-submit="addPost()" style="margin-top:30px;">
-      <h3>Add a new post</h3>
+</script>
 
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-      </div>
-      <button type="submit" class="btn btn-primary">Post</button>
-    </form> -->
-
-  </script>
-
-  <script type="text/ng-template" id="/posts.html">
-    <div class="page-header">
-      <h3>
-        <a ng-show="post.link" href="{{post.link}}">
-          {{post.title}}
-        </a>
-        <span ng-hide="post.link">
-          {{post.title}}
-        </span>
-      </h3>
-    </div>
-
-    <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-      <!-- <button img="public/images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">Upvote</button> -->
-      <input type="image" src="images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="incrementUpvotes(comment)"/>
-      <div>{{comment.upvotes}}</div>
-      <input type="image" src="images/downarrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="decrementUpvotes(comment)"/>
-      <!-- <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">Downvote</button> -->
-      by {{comment.author}}
-      <span style="font-size:20px; margin-left:10px;">
-        {{comment.body}}
+<script type="text/ng-template" id="/posts.html">
+  <div class="page-header">
+    <h3>
+      <a ng-show="post.link" href="{{post.link}}">
+        {{post.title}}
+      </a>
+      <span ng-hide="post.link">
+        {{post.title}}
       </span>
-    </div>
-    <form ng-submit="addComment()"
-    style="margin-top:30px;">
-    <h3>Add a new comment</h3>
+    </h3>
+  </div>
 
-    <div class="form-group">
-      <input type="text"
-      class="form-control"
-      placeholder="Comment"
-      ng-model="body"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Post</button>
-  </form>
+  <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+    <!-- <button img="public/images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">Upvote</button> -->
+    <input type="image" src="images/uparrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="incrementUpvotes(comment)"/>
+    <div>{{comment.upvotes}}</div>
+    <input type="image" src="images/downarrow.png" ng-hide="comment.votes.includes(currentUser())" ng-click="decrementUpvotes(comment)"/>
+    <!-- <button ng-hide="comment.votes.includes(currentUser())" class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">Downvote</button> -->
+    by {{comment.author}}
+    <span id="span-comment">
+      {{comment.body}}
+    </span>
+  </div>
+  <form id="form-comment" ng-submit="addComment()">
+  <h3>Add a new comment</h3>
+
+  <div class="form-group">
+    <input type="text"
+    class="form-control"
+    placeholder="Comment"
+    ng-model="body"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
 </script>
 
 <script type="text/ng-template" id="/register.html">
@@ -304,24 +176,23 @@
     <span>{{ error.message }}</span>
   </div>
 
-  <form ng-submit="register()"
-    style="margin-top:30px;">
-    <h3>Register</h3>
+  <form id="form-register" ng-submit="register()">
+  <h3>Register</h3>
 
-    <div class="form-group">
-      <input type="text"
-      class="form-control"
-      placeholder="Username"
-      ng-model="user.username"></input>
-    </div>
-    <div class="form-group">
-      <input type="password"
-      class="form-control"
-      placeholder="Password"
-      ng-model="user.password"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-  </form>
+  <div class="form-group">
+    <input type="text"
+    class="form-control"
+    placeholder="Username"
+    ng-model="user.username"></input>
+  </div>
+  <div class="form-group">
+    <input type="password"
+    class="form-control"
+    placeholder="Password"
+    ng-model="user.password"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
 </script>
 
 <script type="text/ng-template" id="/login.html">
@@ -333,24 +204,23 @@
     <span>{{ error.message }}</span>
   </div>
 
-  <form ng-submit="logIn()"
-    style="margin-top:30px;">
-    <h3>Log In</h3>
+  <form id="form-submit" ng-submit="logIn()">
+  <h3>Log In</h3>
 
-    <div class="form-group">
-      <input type="text"
-      class="form-control"
-      placeholder="Username"
-      ng-model="user.username"></input>
-    </div>
-    <div class="form-group">
-      <input type="password"
-      class="form-control"
-      placeholder="Password"
-      ng-model="user.password"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Log In</button>
-  </form>
+  <div class="form-group">
+    <input type="text"
+    class="form-control"
+    placeholder="Username"
+    ng-model="user.username"></input>
+  </div>
+  <div class="form-group">
+    <input type="password"
+    class="form-control"
+    placeholder="Password"
+    ng-model="user.password"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Log In</button>
+</form>
 </script>
 
 </body>

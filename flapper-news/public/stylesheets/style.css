@@ -1,8 +1,230 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.glyphicon-thumbs-up {cursor:pointer}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code, del, dfn, em, img, input, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-a {
-  color: #00B7FF;
+div {
+  display: block;
+}
+
+a{
+  color: inherit;
+}
+
+a:hover {
+  text-decoration:none;
+}
+
+.navbar>.container-fluid  {
+  flex-wrap: nowrap;
+}
+
+.container-fluid {
+  padding-left:0;
+  padding-right:0;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: 100%;
+  margin-right:0;
+  vertical-align: middle;
+  box-shadow:0 0 0;
+}
+
+
+.form-inline {
+  flex-flow: row nowrap;
+}
+
+#form-input{
+  background-color:#f3f3f3;
+  border: 1px solid transparent;
+  border-radius:4px;
+  box-shadow: 0 0 0;
+  padding-right:0;
+}
+
+#form-input-field {
+  border:none;
+  background-color:#f3f3f3;
+}
+
+.post {
+  background-color: #FFFFFF;
+  padding-left: 40px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: color .5s,fill .5s,box-shadow .5s;
+  overflow: hidden;
+  background-color: rgba(255,255,255,0.8);
+  display: block;
+  font-size: 100%;
+}
+.post-lefthand-column {
+  border-left: 4px solid transparent;
+}
+.post-lefthand-column-voting {
+  align-items: center;
+  display: flex;
+  fill: inherit;
+  flex-direction: column;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+  overflow:visible;
+  z-index:1;
+  padding-left:0;
+  padding-right:0;
+}
+
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+#search-icon {
+  padding-left:5px;
+}
+
+#button-div {
+  right:50px;
+}
+
+#dropdown-div {
+  position:absolute;
+}
+
+.row {
+  overflow-x:auto;
+  top:30px;
+  margin-right:0;
+  left:0;right:0;
+  bottom:0;
+  position:absolute;
+  padding: 16px;
+  margin-top: 27px;
+  background-color: #DAE0E6;
+  display:flex;
+}
+
+.login-button{
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  line-height: 24px;
+  text-transform: uppercase;
+  padding: 3px 16px;
+  border-color: blue;
+  margin-left: 4px;
+  display: block;
+}
+
+.register-button {
+  border: 1px solid transparent;
+  background-color: #0079D3;
+  color: white;
+  fill: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  line-height: 24px;
+  text-transform: uppercase;
+  padding: 3px 16px;
+  border-color: blue;
+  margin-left: 4px;
+  display: block;
+}
+
+.register-button:hover {
+  filter: brightness(120%);
+  color: white;
+}
+
+#addPostForm {
+  margin-top:30px;
+}
+
+.post-righthand-content {
+  background:#ffffff;
+  padding-top: 8px;
+  position: relative;
+}
+
+.post-righthand-content-lower {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+.post-righthand-content-lower-content {
+  font-size:12px;
+  font-weight:700;
+  line-height:16px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  padding: 0 8px 0 4px;
+  flex-grow: 1;
+}
+
+.post-righthand-content-lower-content-commentslink {
+  margin-right:4px;
+  min-width: 25px;
+  white-space: nowrap;
+  word-break:normal;
+  border-radius: 2px;
+}
+
+.post-righthand-content-lower-content-commentslink-numOfComments {
+  display: inline-block;
+  line-height: 1;
+  text-transform: capitalize;
+  vertical-align: middle;
+  word-break: normal;
+  white-space: pre-line;
+}
+
+#dropdownMenuButton {
+  background-color:white;
+  color:gray;
+  border: 1px solid gray;
+  margin-left:5px;
+}
+
+#dropdownMenu {
+  position:absolute;
+}
+
+#span-comment {
+  font-size:20px;
+  margin-left:10px;
+}
+
+#form-comment,#form-register,#form-submit {
+  margin-top:30px;
+}
+
+#link-input, #title-input {
+  box-shadow:0 0 0;
 }
