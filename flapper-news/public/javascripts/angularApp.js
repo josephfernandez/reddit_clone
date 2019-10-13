@@ -157,6 +157,7 @@ function($stateProvider, $urlRouterProvider) {
     },
     logOut: function(){
       $window.localStorage.removeItem('flapper-news-token');
+
     }
   };
 
@@ -166,17 +167,19 @@ function($stateProvider, $urlRouterProvider) {
 '$scope',
 'posts',
 'auth',
-function($scope, posts, auth){
-  $scope.currentUser = auth.currentUser;
+function($scope, posts, auth) {
   $scope.posts = posts.posts;
   $scope.isLoggedIn = auth.isLoggedIn;
   $scope.addPost = function(){
-    if($scope.title === '') { return; }
+    if($scope.title === '' || $scope.body === '' || $scope.link === '') { return; }
     posts.create({
       title: $scope.title,
+      body: $scope.body,
+      author: auth.currentUser(),
       link: $scope.link,
     });
     $scope.title = '';
+    $scope.body = '';
     $scope.link = '';
   };
 
@@ -255,6 +258,9 @@ function($scope, auth){
 }]);
 
 $(document).ready(function() {
+  // $(document).on("click",".register-button",function() {
+  //   alert("hell0")
+  // })
   $(document).on("mouseleave","#form-input-field",function() {
     if($(this).not(':focus')) {
       $(this).css('background-color','#f3f3f3');
@@ -279,3 +285,12 @@ $(document).ready(function() {
     $(this).parent('form').parent('div').css('border','1px solid #0079D3');
   });
 });
+
+
+// document.getElementById("form-input").addEventListener("search", function(event) {
+//   $("#form-input").empty();
+// });
+// //
+// $("#searchclear").click(function(){
+//     $("#searchinput").val('');
+// });

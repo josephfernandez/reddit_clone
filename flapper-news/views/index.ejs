@@ -46,16 +46,15 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </div></li> -->
-      <li ng-hide="!isLoggedIn()"><a class="login-button" href="#/login">login</a></li>
-      <li ng-hide="!isLoggedIn()"><a class="register-button" href="#/register">register</a></li>
-      <li ng-hide="!isLoggedIn()">
-        <div class="dropdown" id="dropdown-div">
-          <button class="btn btn-secondary btn-sm dropdown-toggle shadow-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li ng-hide="isLoggedIn()"><a class="login-button" href="#/login">login</a></li>
+      <li ng-hide="isLoggedIn()"><a class="register-button" href="#/register">register</a></li>
+      <li>
+        <div class="dropdown" ng-style="{ 'transform' : (isLoggedIn()) ? 'translateY(-16px)' : 'translateY(0)' }" id="dropdown-div">
+          <button class="btn btn-secondary btn-md dropdown-toggle shadow-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user"></i></button>
             <div id="dropdownMenu" class="dropdown-menu dropdown-menu-right float-right" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a ng-hide="isLoggedIn()" class="dropdown-item" href="#/login">Login / Register</a>
+              <a ng-hide="!isLoggedIn()" ng-click="logOut()" class="dropdown-item" href="#">Logout</a>
             </div>
           </div>
         </li>
@@ -86,11 +85,14 @@
 
 <script type="text/ng-template" id="/home.html">
 
-  <form ng-submit="addPost()" id="addPostForm">
+  <form ng-hide="!isLoggedIn()" ng-submit="addPost()" id="addPostForm">
     <h3>Add a new post</h3>
 
     <div class="form-group">
       <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    </div>
+    <div class="form-group">
+      <input id="body-input" type="text" class="form-control" placeholder="Body" ng-model="body"></input>
     </div>
     <div class="form-group">
       <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
@@ -110,7 +112,7 @@
         <div class="post-righthand-content-lower">
           <div class="post-righthand-content-lower-content">
           <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}">
-            <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p><h1>{{post.title}}</h1></p> <p>{{post.comments.length}} comments</p></span>
+            <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p><h1>{{post.title}} by {{post.author}}</h1></p><h2>{{post.body}}</h2><p>{{post.comments.length}} comments</p></span>
           </div>
         </div>
       </div>

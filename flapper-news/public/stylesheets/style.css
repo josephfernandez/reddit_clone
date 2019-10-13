@@ -208,8 +208,9 @@ a:hover {
 #dropdownMenuButton {
   background-color:white;
   color:gray;
-  border: 1px solid gray;
+  border:none;
   margin-left:5px;
+  z-index: 1;
 }
 
 #dropdownMenu {
