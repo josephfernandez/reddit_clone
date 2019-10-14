@@ -261,13 +261,13 @@ $(document).ready(function() {
   // $(document).on("click",".register-button",function() {
   //   alert("hell0")
   // })
-  $(document).on("mouseleave","#form-input-field",function() {
-    if($(this).not(':focus')) {
-      $(this).css('background-color','#f3f3f3');
-      $(this).parent('form').parent('div').css('background-color','f3f3f3');
-      $(this).parent('form').parent('div').css('border','1px solid transparent');
+  $(document).on("mouseleave","#form-input",function() {
+    if($('#form-input-field').not(':focus')) {
+      $('#form-input').css('background-color','#f3f3f3');
+      $('#form-input-field').css('background-color','#f3f3f3');
+      $('#form-input').css('border','1px solid transparent');
     }
-    if($(this).is(':focus')){
+    if($('#form-input-field').is(':focus')){
       $('#form-input').css('background-color','white');
       $('#form-input-field').css('background-color','white');
       $('#form-input').css('border','1px solid #0079D3');
@@ -288,18 +288,26 @@ $(document).ready(function() {
     $('#form-input-field').css('background-color','white');
     $(this).css('border','1px solid #0079D3');
   });
-  $(document).on("mouseleave","#search-icon",function(){
-    if($('#form-input-field').not(':focus')) {
-      $('#form-input').css('background-color','#f3f3f3');
-      $('#form-input-field').css('background-color','#f3f3f3');
-      $('#form-input').css('border','1px solid transparent');
-    }
-    if($('#form-input-field').is(':focus')){
-      $('#form-input').css('background-color','white');
-      $('#form-input-field').css('background-color','white');
-      $('#form-input').css('border','1px solid #0079D3');
-    }
+  // $(document).on("mouseleave","#search-icon",function(){
+  //   if($('#form-input-field').not(':focus')) {
+  //     $('#form-input').css('background-color','#f3f3f3');
+  //     $('#form-input-field').css('background-color','#f3f3f3');
+  //     $('#form-input').css('border','1px solid transparent');
+  //   }
+  //   if($('#form-input-field').is(':focus')){
+  //     $('#form-input').css('background-color','white');
+  //     $('#form-input-field').css('background-color','white');
+  //     $('#form-input').css('border','1px solid #0079D3');
+  //   }
+  // });
+  $('#form-input').hover(function() {
+    $('#form-input').css('background-color','white');
+    $('#form-input-field').css('background-color','white');
+    $('#form-input').css('border','1px solid #0079D3');
   });
+  $(document).on("click",'#form-input',function(){
+    $('#form-input-field').focus();
+  })
   $(document).on("mouseenter","#search-icon",function(){
     $('#form-input').css('background-color','white');
     $('#form-input-field').css('background-color','white');
