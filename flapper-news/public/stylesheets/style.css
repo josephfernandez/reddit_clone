@@ -104,6 +104,29 @@ a:hover {
   min-height:70px;
 }
 
+#post:hover {
+  cursor:pointer;
+}
+
+#uparrow {
+  /* outline: 1px solid blue; */
+  color: grey;
+}
+
+#uparrow:hover {
+  color: red;
+  background-color:#ededed;
+  border-radius:4px;
+}
+
+#downarrow {
+  color:grey;
+}
+#downarrow:hover {
+  color: blue;
+  background-color:#ededed;
+  border-radius:4px;
+}
 #dropdown-div {
   position:absolute;
 }

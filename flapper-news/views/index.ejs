@@ -44,68 +44,67 @@
                 </li>
               </ul>
             </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </div>
       <ui-view></ui-view>
-
       <script type="text/ng-template" id="/home.html">
-
-        <div class="row" id="background">
-          <div class="container" style="max-width:250px;">
-            <form ng-hide="!isLoggedIn()" ng-submit="addPost()" id="addPostForm" style="max-height:250px;">
-              <h3>Add a new post</h3>
-
-              <div class="form-group">
-                <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-              </div>
-              <div class="form-group">
-                <input id="body-input" type="text" class="form-control" placeholder="Body" ng-model="body"></input>
-              </div>
-              <div class="form-group">
-                <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-              </div>
-              <button type="submit" class="btn btn-primary">Post</button>
-            </form>
-          </div>
+        <div class="container">
+          <!-- <div class="row justify-content-center post">
+          <div class="col-3" style="border: 1px solid yellow;"></div>
         </div>
-        <br><br>
-        <div class="row post" style="max-width:300px;" id="post" ng-repeat="post in posts | orderBy: '-upvotes'">
-          <div class="col xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 post-lefthand-column">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 post-lefthand-column-voting" style="background-color:yellow; height:inherit;">
-              <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
-              <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
-              <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/>
-            </div>
-            <div class="post-righthand-content" data-click-id="background">
-              <article></article>
-              <div class="post-righthand-content-lower">
-                <div class="post-righthand-content-lower-content">
-                  <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}">
-                    <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p>Posted by {{post.author}}</p><h2>{{post.title}}</h2><h3>{{post.body}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div> -->
+      <!-- <div class="row justify-content-center" id="background">
+      <div class="container" style="max-width:250px;">
+      <form ng-hide="!isLoggedIn()" ng-submit="addPost()" id="addPostForm" style="max-height:250px;">
+      <h3>Add a new post</h3>
 
-            <!-- <span style="font-size:20px; margin-left:10px;">
-            <span ng-show="post.author">posted by <a>{{post.author}}</a> |
-          </span>
-          <a ng-show="post.link" href="{{post.link}}">
-          {{post.title}}
-        </a>
-        <span ng-hide="post.link">
-        {{post.title}}
-      </span>
-    </span> -->
-    <!-- <span>
-    <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
-  </span> -->
+      <div class="col-6 form-group">
+      <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    </div>
+    <div class="col-6 form-group">
+    <input id="body-input" type="text" class="form-control" placeholder="Body" ng-model="body"></input>
+  </div>
+  <div class="form-group">
+  <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+</div>
+<button type="submit" class="btn btn-primary">Post</button>
+</form>
+</div> -->
+<!-- </div> -->
+<!-- <br><br> -->
+<div class="row justify-content-center">
+  <!-- <div class="col-6 post-lefthand-column"> -->
+
+  <!-- <div class="col-4 pl-0 pr-0" style="border:1px solid blue; border-radius: 4px; max-height:140px;" id="post" ng-repeat="post in posts | orderBy: '-upvotes'"> -->
+  <div class="col-1 pr-0 pl-0 h-100 text-center" style="border:1px solid yellow; max-width:45px; max-height:138px">
+    <span id="uparrow"><i class="fa fa-arrow-up" style="margin-top:10px; padding: 0 3px 0 3px;" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"></i></span>
+    <div style="margin: 3px 0 3px 0; background-color:yellow; color:#1A1A1B">{{post.upvotes}}</div>
+    <span id="downarrow"><i class="fa fa-arrow-down" style="padding: 0 3px 0 3px;" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"></i></span>
+  </div>
+  <div class="col-3" style="background-color:white; max-height:138px;"data-click-id="background">
+
+  </div>
+</div>
+</div>
+
+<!-- <span style="font-size:20px; margin-left:10px;">
+<span ng-show="post.author">posted by <a>{{post.author}}</a> |
+</span>
+<a ng-show="post.link" href="{{post.link}}">
+{{post.title}}
+</a>
+<span ng-hide="post.link">
+{{post.title}}
+</span>
+</span> -->
+<!-- <span>
+<a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
+</span> -->
 
 
 </script>
-
+<!-- </div> -->
 <script type="text/ng-template" id="/posts.html">
   <div class="page-header">
     <h3>
