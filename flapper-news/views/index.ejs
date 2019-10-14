@@ -13,123 +13,96 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
   <script src="/javascripts/angularApp.js"></script>
 </head>
-<body ng-app="flapperNews">
-  <div class="row">
-    <nav class="navbar navbar-fixed-top navbar-light bg-white" ng-controller="NavCtrl">
-      <div class="container-fluid">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 navbar-header pull-left">
+<body ng-app="flapperNews" style="min-width:500px;">
+  <div class="container">
+    <div class="row justify-content-between">
+      <nav class="navbar navbar-fixed-top w-100 navbar-light bg-white" style="flex-wrap:nowrap;"ng-controller="NavCtrl">
+        <div class="col-md-2 col-sm-8 navbar-header" >
           <a class="navbar-brand" href="#">
-            <img src="images/redditlogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="images/redditlogo.png" width="30" height="30" style="max-width:100%;" class="d-inline-block align-top" alt="">
             Reddit Clone</a>
           </div>
-          <!-- <label class="form-image" for="search-bar">
-          <svg class="form-image-svg" viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-          <path d="images/uparrow.png"></path>
-        </label> -->
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7 search fg--search" id="form-input">
-          <form class="form-inline">
-            <span class="fa fa-search" id="search-icon"></span>
-            <input class="form-control pr-xl-0 pr-lg-0 pr-md-0 pr-sm-0" type="search" placeholder="Search Reddit Clone.." aria-label="Search" id="form-input-field">
-          </form>
-        </div>
-        <!-- <div class="col-lg-4"> -->
-
-        <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block" id="button-div">
-          <ul class="nav navbar-nav navbar-right pull-right">
-            <!-- <li><div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div></li> -->
-      <li ng-hide="isLoggedIn()"><a class="login-button" href="#/login">login</a></li>
-      <li ng-hide="isLoggedIn()"><a class="register-button" href="#/register">register</a></li>
-      <li>
-        <div class="dropdown" ng-style="{ 'transform' : (isLoggedIn()) ? 'translateY(-16px)' : 'translateY(0)' }" id="dropdown-div">
-          <button class="btn btn-secondary btn-md dropdown-toggle shadow-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user"></i></button>
-            <div id="dropdownMenu" class="dropdown-menu dropdown-menu-right float-right" aria-labelledby="dropdownMenuButton">
-              <a ng-hide="isLoggedIn()" class="dropdown-item" href="#/login">Login / Register</a>
-              <a ng-hide="!isLoggedIn()" ng-click="logOut()" class="dropdown-item" href="#">Logout</a>
+          <div class="col-md-4 d-none d-md-block search fg--search" id="form-input">
+            <form class="form-inline">
+              <span class="fa fa-search" id="search-icon"></span>
+              <input class="form-control pr-xl-0 pr-lg-0 pr-md-0 pr-sm-0" type="search" placeholder="Search Reddit Clone.." aria-label="Search" id="form-input-field">
+            </form>
+          </div>
+          <div class="col-md-3 col-sm-4 pl-0" id="button-div">
+            <ul class="nav navbar-nav pull-right">
+              <li ng-hide="isLoggedIn()"><a class="login-button" href="#/login">login</a></li>
+              <li ng-hide="isLoggedIn()"><a class="register-button" href="#/register">register</a></li>
+              <li>
+                <div ng-style="{ 'transform' : (isLoggedIn()) ? 'translateY(-16px)' : 'translateY(0)' }" id="dropdown-div">
+                  <button class="btn btn-secondary btn-md dropdown-toggle shadow-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i></button>
+                    <div id="dropdownMenu" class="dropdown-menu dropdown-menu-right float-right" aria-labelledby="dropdownMenuButton">
+                      <a ng-hide="isLoggedIn()" class="dropdown-item" href="#/login">Login / Register</a>
+                      <a ng-hide="!isLoggedIn()" ng-click="logOut()" class="dropdown-item" href="#">Logout</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-1 d-none d-sm-block d-md-none">
-      <!-- <ul class="nav navbar-nav navbar-right pull-right">
-      <li><a class="login-button" href="#/login">login</a></li>
-      <li><a class="register-button" href="#/register">register</a></li>
-    </ul> -->
-  </div>
-  <div class="col-xs-1 d-none d-sm-block d-sm-none">
-    <!-- <ul class="nav navbar-nav navbar-right pull-right">
-    <li><a class="login-button" href="#/login">login</a></li>
-    <li><a class="register-button" href="#/register">register</a></li>
-  </ul> -->
-</div>
-</div>
-</nav>
-</div>
-<div class="row" id="background">
-  <div class="container-fluid">
-    <div class="d-flex justify-content-center">
-      <ui-view></ui-view>
-    </div>
-  </div>
-</div>
-
-<script type="text/ng-template" id="/home.html">
-
-  <form ng-hide="!isLoggedIn()" ng-submit="addPost()" id="addPostForm">
-    <h3>Add a new post</h3>
-
-    <div class="form-group">
-      <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
-    </div>
-    <div class="form-group">
-      <input id="body-input" type="text" class="form-control" placeholder="Body" ng-model="body"></input>
-    </div>
-    <div class="form-group">
-      <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Post</button>
-  </form>
-  <br><br>
-  <div class="post" ng-repeat="post in posts | orderBy: '-upvotes'">
-    <div class="post-lefthand-column">
-      <div class="post-lefthand-column-voting">
-        <!-- <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
-        <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
-        <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/> -->
+        </nav>
       </div>
-      <div class="post-righthand-content" data-click-id="background">
-        <article></article>
-        <div class="post-righthand-content-lower">
-          <div class="post-righthand-content-lower-content">
-          <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}">
-            <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p><h1>{{post.title}} by {{post.author}}</h1></p><h2>{{post.body}}</h2><p>{{post.comments.length}} comments</p></span>
+      <ui-view></ui-view>
+
+      <script type="text/ng-template" id="/home.html">
+
+        <div class="row" id="background">
+          <div class="container" style="max-width:250px;">
+            <form ng-hide="!isLoggedIn()" ng-submit="addPost()" id="addPostForm" style="max-height:250px;">
+              <h3>Add a new post</h3>
+
+              <div class="form-group">
+                <input id="title-input" type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+              </div>
+              <div class="form-group">
+                <input id="body-input" type="text" class="form-control" placeholder="Body" ng-model="body"></input>
+              </div>
+              <div class="form-group">
+                <input id="link-input" type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+              </div>
+              <button type="submit" class="btn btn-primary">Post</button>
+            </form>
           </div>
         </div>
-      </div>
-      <!-- <span style="font-size:20px; margin-left:10px;">
-      <span ng-show="post.author">posted by <a>{{post.author}}</a> |
-    </span>
-    <a ng-show="post.link" href="{{post.link}}">
-    {{post.title}}
-  </a>
-  <span ng-hide="post.link">
-  {{post.title}}
-</span>
-</span> -->
-<!-- <span>
-<a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
-</span> -->
-</div>
+        <br><br>
+        <div class="row post" style="max-width:300px;" id="post" ng-repeat="post in posts | orderBy: '-upvotes'">
+          <div class="col xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 post-lefthand-column">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 post-lefthand-column-voting" style="background-color:yellow; height:inherit;">
+              <input type="image" src="images/uparrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"/>
+              <div style="color:#1A1A1B">upvotes: {{post.upvotes}}</div>
+              <input type="image" src="images/downarrow.png" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"/>
+            </div>
+            <div class="post-righthand-content" data-click-id="background">
+              <article></article>
+              <div class="post-righthand-content-lower">
+                <div class="post-righthand-content-lower-content">
+                  <a class="post-righthand-content-lower-content-commentslink" href="#/posts/{{post._id}}">
+                    <span class="post-righthand-content-lower-content-commentslink-numOfComments"><p>Posted by {{post.author}}</p><h2>{{post.title}}</h2><h3>{{post.body}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <span style="font-size:20px; margin-left:10px;">
+            <span ng-show="post.author">posted by <a>{{post.author}}</a> |
+          </span>
+          <a ng-show="post.link" href="{{post.link}}">
+          {{post.title}}
+        </a>
+        <span ng-hide="post.link">
+        {{post.title}}
+      </span>
+    </span> -->
+    <!-- <span>
+    <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
+  </span> -->
+
 
 </script>
 
@@ -157,16 +130,16 @@
     </span>
   </div>
   <form id="form-comment" ng-submit="addComment()">
-  <h3>Add a new comment</h3>
+    <h3>Add a new comment</h3>
 
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Comment"
-    ng-model="body"></input>
-  </div>
-  <button type="submit" class="btn btn-primary">Post</button>
-</form>
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Comment"
+      ng-model="body"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
 </script>
 
 <script type="text/ng-template" id="/register.html">
@@ -179,22 +152,22 @@
   </div>
 
   <form id="form-register" ng-submit="register()">
-  <h3>Register</h3>
+    <h3>Register</h3>
 
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Username"
-    ng-model="user.username"></input>
-  </div>
-  <div class="form-group">
-    <input type="password"
-    class="form-control"
-    placeholder="Password"
-    ng-model="user.password"></input>
-  </div>
-  <button type="submit" class="btn btn-primary">Register</button>
-</form>
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
 </script>
 
 <script type="text/ng-template" id="/login.html">
@@ -207,22 +180,22 @@
   </div>
 
   <form id="form-submit" ng-submit="logIn()">
-  <h3>Log In</h3>
+    <h3>Log In</h3>
 
-  <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="Username"
-    ng-model="user.username"></input>
-  </div>
-  <div class="form-group">
-    <input type="password"
-    class="form-control"
-    placeholder="Password"
-    ng-model="user.password"></input>
-  </div>
-  <button type="submit" class="btn btn-primary">Log In</button>
-</form>
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
 </script>
 
 </body>
