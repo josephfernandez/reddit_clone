@@ -258,9 +258,6 @@ function($scope, auth){
 }]);
 
 $(document).ready(function() {
-  // $(document).on("click",".register-button",function() {
-  //   alert("hell0")
-  // })
   $(document).on("mouseleave","#form-input",function() {
     if($('#form-input-field').not(':focus')) {
       $('#form-input').css('background-color','#f3f3f3');

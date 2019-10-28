@@ -26,9 +26,8 @@ router.get('/posts', function(req, res, next) {
 
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
-  // post.author = req.payload.username;
-  console.log(post)
-  post.save(function(err, post){
+
+    post.save(function(err, post){
     if(err){ return next(err); }
 
     res.json(post);
@@ -120,6 +119,7 @@ router.post('/posts/:post/comments', auth, function(req, res, next) {
 
 // upvote a comment
 router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, next) {
+  console.log(req.payload)
   req.comment.votes.push(req.payload.username);
   req.comment.upvote(function(err, comment){
     if (err) { return next(err); }

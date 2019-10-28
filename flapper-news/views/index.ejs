@@ -15,7 +15,7 @@
 </head>
 <body ng-app="flapperNews" style="min-width:500px;">
   <div class="container">
-    <div class="row justify-content-between">
+    <div class="navy row justify-content-between">
       <nav class="navbar navbar-fixed-top w-100 navbar-light bg-white" style="flex-wrap:nowrap;"ng-controller="NavCtrl">
         <div class="col-md-2 col-sm-8 navbar-header" >
           <a class="navbar-brand" href="#">
@@ -47,9 +47,12 @@
           </nav>
         </div>
       </div>
-      <ui-view></ui-view>
+      <div class="row align-items-center" style="margin-top:70px;">
+        <div class="col-md-6 col-md-offset-3 container-size">
+          <ui-view class="content"></ui-view>
+        </div>
+      </div>
       <script type="text/ng-template" id="/home.html">
-        <div class="container">
           <!-- <div class="row justify-content-center post">
           <div class="col-3" style="border: 1px solid yellow;"></div>
         </div>
@@ -71,37 +74,67 @@
 <button type="submit" class="btn btn-primary">Post</button>
 </form>
 </div> -->
+
 <!-- </div> -->
 <!-- <br><br> -->
-<div class="row justify-content-center">
-  <!-- <div class="col-6 post-lefthand-column"> -->
-
-  <!-- <div class="col-4 pl-0 pr-0" style="border:1px solid blue; border-radius: 4px; max-height:140px;" id="post" ng-repeat="post in posts | orderBy: '-upvotes'"> -->
-  <div class="col-1 pr-0 pl-0 h-100 text-center" style="border:1px solid yellow; max-width:45px; max-height:138px">
-    <span id="uparrow"><i class="fa fa-arrow-up" style="margin-top:10px; padding: 0 3px 0 3px;" ng-hide="post.votes.includes(currentUser())" ng-click="incrementUpvotes(post)"></i></span>
-    <div style="margin: 3px 0 3px 0; background-color:yellow; color:#1A1A1B">{{post.upvotes}}</div>
-    <span id="downarrow"><i class="fa fa-arrow-down" style="padding: 0 3px 0 3px;" ng-hide="post.votes.includes(currentUser())" ng-click="decrementUpvotes(post)"></i></span>
+<div ng-repeat="post in posts | orderBy: '-upvotes'">
+  <a class="clickable-div" href="#!/posts/{{post._id}}">
+  <div class="post-container">
+    <div class="vote-container" ng-hide="post.usersVoted.includes(userId())">
+      <i class="fa fa-arrow-up" id="arrow-up-icon" ng-click="incrementUpvotes(post)"></i>
+      <span id="num-votes">{{post.upvotes}}</span>
+      <i class="fa fa-arrow-down" id="arrow-down-icon" ng-click="decrementUpvotes(post)"></i>
+    </div>
+    <div class="post-body">
+      <!-- <span ng-show="post.author">
+        posted by <a>{{ post.author }}</a>
+      </span> -->
+      <span style="font-size: 12px; margin-left:5px; flex-grow: 0; color: black; text-decoration: none;">
+        posted by {{ post.author }} {{ post.created }} hours ago
+      </span>
+      <span style="flex-grow: 0;">
+        <a ng-show="post.link" href="{{post.link}}" style="font-size:18px; margin-left: 5px;">
+          <b>{{post.title}}</b><br>
+          <p style="margin-left:20px;">{{post.body}}</p>
+        </a>
+        <span ng-hide="post.link" style="font-size:20px; margin-left: 5px;">
+          {{post.title}}<br>
+          <p style="margin-left:20px;">{{post.body}}</p>
+        </span>
+      </span>
+      <div class="row" style="margin-left: 5px; margin-bottom: 5px; flex-grow: 0;">
+        <span>
+          <a class="comment-icons" href="#!/posts/{{post._id}}"><i class="fas fa-comment-alt"></i> {{post.comments.length}} Comments</a>
+        </span>
+        <div class="dropdown" id="share-dropdown">
+          <a class="comment-icons" href="" data-toggle="dropdown">
+            <i class="fa fa-share"></i> Share
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href=""><i class="fa fa-link"></i> Copy Link</a>
+            <a class="dropdown-item" href=""><i class="fa fa-code"></i> Embed</a>
+          </div>
+        </div>
+        <div class="dropdown" id="hide-report-dropdown">
+          <a class="comment-icons" href="" data-toggle="dropdown">
+            <i class="fa fa-ellipsis-h"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href=""><i class="fa fa-eye-slash"></i> Hide</a>
+            <a class="dropdown-item" href=""><i class="fas fa-flag"></i> Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-3" style="background-color:white; max-height:138px;"data-click-id="background">
-
-  </div>
-</div>
-</div>
-
-<!-- <span style="font-size:20px; margin-left:10px;">
-<span ng-show="post.author">posted by <a>{{post.author}}</a> |
-</span>
-<a ng-show="post.link" href="{{post.link}}">
-{{post.title}}
 </a>
-<span ng-hide="post.link">
-{{post.title}}
-</span>
-</span> -->
+</div>
+
+
 <!-- <span>
 <a href="#/posts/{{post._id}}">{{post.comments.length}} Comments</a>
 </span> -->
-
+<!-- </div> -->
 
 </script>
 <!-- </div> -->
