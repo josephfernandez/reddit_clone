@@ -4,7 +4,7 @@ require('./models/Posts');
 require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
-mongoose.connect('mongodb+srv://joe:Agustin1@cluster0-pdkdp.mongodb.net/news',{useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/news',{useUnifiedTopology: true, useNewUrlParser: true });
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
